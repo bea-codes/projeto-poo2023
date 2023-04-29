@@ -1,4 +1,3 @@
-package entidades;
 
 public class Comentario {
 	private Usuario author;
