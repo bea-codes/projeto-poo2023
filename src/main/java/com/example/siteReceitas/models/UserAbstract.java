@@ -12,8 +12,6 @@ import java.util.Date;
 import java.util.ArrayList;
 
 @Data
-@AllArgsConstructor
-@NoArgsConstructor
 public abstract class UserAbstract {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

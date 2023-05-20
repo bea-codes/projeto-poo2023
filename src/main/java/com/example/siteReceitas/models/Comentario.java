@@ -1,9 +1,6 @@
 package com.example.siteReceitas.models;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -18,4 +15,7 @@ public class Comentario {
     private Long id;
     private UserAbstract autor;
     private String conteudo;
+
+    @ManyToOne()
+    private Receita receita;
 }

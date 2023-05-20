@@ -16,8 +16,9 @@ public class Receita {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     @ManyToOne
-    @JoinColumn(name = "")
+    @JoinColumn(name = "autor", referencedColumnName = "id")
     private UserAbstract autor;
     private String titulo;
     private String descricao;
