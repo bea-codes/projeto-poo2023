@@ -12,6 +12,6 @@ import lombok.NoArgsConstructor;
 public class ComentarioDto {
     private Long id;
     private UserAbstract autor;
-    private String conteudo
+    private String conteudo;
 
 }
