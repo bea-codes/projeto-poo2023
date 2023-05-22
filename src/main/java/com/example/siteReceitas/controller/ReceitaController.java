@@ -31,9 +31,10 @@ public class ReceitaController {
                 receita.getInstrucoesPreparoPasso1(),
                 receita.getInstrucosPreparoPasso2(),
                 receita.getTempoDePreparo(),
-                receita.getInfoAdicional();
-
-
+                receita.getInfoAdicional(),
+                receita.getDataDePostagem(),
+                receita.getIngredientes(),
+                receita.getComentarios());
     }
 
     private Receita toModel(ReceitaDto receitaDto){
@@ -46,6 +47,9 @@ public class ReceitaController {
         receita.setInstrucosPreparoPasso2(receitaDto.getInstrucosPreparoPasso2());
         receita.setTempoDePreparo(receitaDto.getTempoDePreparo());
         receita.setInfoAdicional(receitaDto.getInfoAdicional());
+        receita.setDataDePostagem(receitaDto.getDataDePostagem());
+        receita.setIngredientes(receitaDto.getIngredientes());
+        receita.setComentarios(receitaDto.getComentarios());
 
         return receita;
 
@@ -84,6 +88,24 @@ public class ReceitaController {
     @PostMapping("receita/{id}")
 
     public ResponseEntity<ReceitaDto> update (@PathVariable Long id, @RequestBody ReceitaDto receitaDto){
-
+        Optional<Receita> receitaOptional = receitaRepository.findById(id);
+        if (receitaOptional.isPresent()) {
+            Receita receita = receitaOptional.get();
+            receita.setAutor(receitaDto.getAutor());
+            receita.setTitulo(receitaDto.getTitulo());
+            receita.setDescricao(receitaDto.getDescricao());
+            receita.setInstrucoesPreparoPasso1(receitaDto.getInstrucoesPreparoPasso1());
+            receita.setInstrucosPreparoPasso2(receitaDto.getInstrucosPreparoPasso2());
+            receita.setTempoDePreparo(receitaDto.getTempoDePreparo());
+            receita.setInfoAdicional(receitaDto.getInfoAdicional());
+            receita.setDataDePostagem(receitaDto.getDataDePostagem());
+            receita.setIngredientes(receitaDto.getIngredientes());
+            receita.setComentarios(receitaDto.getComentarios());
+            receitaRepository.save(receita);
+            ReceitaDto updateReceitadto = toDTO(receita);
+            return ResponseEntity.status(HttpStatus.OK).body(updateReceitadto);
+        } else {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+        }
     }
 }
