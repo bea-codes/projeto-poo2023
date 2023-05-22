@@ -22,68 +22,68 @@ public class ReceitaController {
     @Autowired
     private ReceitaRepository receitaRepository;
 
-        private ReceitaDto toDTO(Receita receita){
+    private ReceitaDto toDTO(Receita receita){
 
-            return new ReceitaDto(receita.getId(),
-                    receita.getAutor(),
-                    receita.getTitulo(),
-                    receita.getDescricao(),
-                    receita.getInstrucoesPreparoPasso1(),
-                    receita.getInstrucosPreparoPasso2(),
-                    receita.getTempoDePreparo(),
-                    receita.getInfoAdicional();
+        return new ReceitaDto(receita.getId(),
+                receita.getAutor(),
+                receita.getTitulo(),
+                receita.getDescricao(),
+                receita.getInstrucoesPreparoPasso1(),
+                receita.getInstrucosPreparoPasso2(),
+                receita.getTempoDePreparo(),
+                receita.getInfoAdicional();
 
 
-        }
+    }
 
-        private Receita toModel(ReceitaDto receitaDto){
-           Receita receita = new Receita();
-           receita.setId(receita.getId());
-           receita.setAutor(receitaDto.getAutor());
-           receita.setTitulo(receitaDto.getTitulo());
-           receita.setDescricao(receitaDto.getDescricao());
-           receita.setInstrucoesPreparoPasso1(receitaDto.getInstrucoesPreparoPasso1());
-           receita.setInstrucosPreparoPasso2(receitaDto.getInstrucosPreparoPasso2());
-           receita.setTempoDePreparo(receitaDto.getTempoDePreparo());
-           receita.setInfoAdicional(receitaDto.getInfoAdicional());
+    private Receita toModel(ReceitaDto receitaDto){
+        Receita receita = new Receita();
+        receita.setId(receita.getId());
+        receita.setAutor(receitaDto.getAutor());
+        receita.setTitulo(receitaDto.getTitulo());
+        receita.setDescricao(receitaDto.getDescricao());
+        receita.setInstrucoesPreparoPasso1(receitaDto.getInstrucoesPreparoPasso1());
+        receita.setInstrucosPreparoPasso2(receitaDto.getInstrucosPreparoPasso2());
+        receita.setTempoDePreparo(receitaDto.getTempoDePreparo());
+        receita.setInfoAdicional(receitaDto.getInfoAdicional());
 
-           return receita;
+        return receita;
 
-        }
+    }
 
-        @GetMapping ("/receita")
+    @GetMapping ("/receita")
 
     public ResponseEntity<List<ReceitaDto>> findAll(){
-            List<Receita> receitas = receitaRepository.findAll();
-            List<ReceitaDto> receitaDtos = receitas.stream()
-                    .map(this::toDTO)
-                    .collect(Collectors.toList());
-            return ResponseEntity.status(HttpStatus.OK).body(receitaDtos);
-        }
+        List<Receita> receitas = receitaRepository.findAll();
+        List<ReceitaDto> receitaDtos = receitas.stream()
+                .map(this::toDTO)
+                .collect(Collectors.toList());
+        return ResponseEntity.status(HttpStatus.OK).body(receitaDtos);
+    }
 
-        @GetMapping("/receita/{id}")
+    @GetMapping("/receita/{id}")
 
     public ResponseEntity<ReceitaDto> finById(@PathVariable Long id){
-            Optional<Receita> receita = receitaRepository.findById(id);
-            if (receita.isPresent()) {
-                ReceitaDto receitaDto = toDTO(receita.get());
-                return ResponseEntity.status(HttpStatus.OK).body(receitaDto);
-            }else {
-                return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
-            }
+        Optional<Receita> receita = receitaRepository.findById(id);
+        if (receita.isPresent()) {
+            ReceitaDto receitaDto = toDTO(receita.get());
+            return ResponseEntity.status(HttpStatus.OK).body(receitaDto);
+        }else {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
         }
+    }
 
-        @PostMapping("/receita")
-        public ResponseEntity<ReceitaDto> create(@RequestBody ReceitaDto receitaDto){
-            Receita receita = toModel(receitaDto);
-            receitaRepository.save(receita);
-            ReceitaDto createReceitadto = toDTO(receita);
-            return ResponseEntity.status(HttpStatus.CREATED).body(createReceitadto);
-        }
+    @PostMapping("/receita")
+    public ResponseEntity<ReceitaDto> create(@RequestBody ReceitaDto receitaDto){
+        Receita receita = toModel(receitaDto);
+        receitaRepository.save(receita);
+        ReceitaDto createReceitadto = toDTO(receita);
+        return ResponseEntity.status(HttpStatus.CREATED).body(createReceitadto);
+    }
 
-        @PostMapping("receita/{id}")
+    @PostMapping("receita/{id}")
 
     public ResponseEntity<ReceitaDto> update (@PathVariable Long id, @RequestBody ReceitaDto receitaDto){
 
-        }
+    }
 }
