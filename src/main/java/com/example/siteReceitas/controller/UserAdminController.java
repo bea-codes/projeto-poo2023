@@ -16,7 +16,7 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping(value="/Admin", produces = MediaType.APPLICATION_JSON_VALUE)
+@RequestMapping(value="/Admiin", produces = MediaType.APPLICATION_JSON_VALUE)
 public class UserAdminController {
     @Autowired
     public UserPadraoRepository userPadraoRepository;
