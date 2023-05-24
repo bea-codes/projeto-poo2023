@@ -1,3 +1,4 @@
+
 public class UserPadrao extends UserAbstract{
 	
 	public UserPadrao(){
