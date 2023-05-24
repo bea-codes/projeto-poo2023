@@ -8,27 +8,24 @@ import lombok.NoArgsConstructor;
 @Data
 @Entity
 public class UserPadrao extends UserAbstract{
+    @Override
+    public void enviarPostagem() {
 
-//    @Override
-//    public void enviarComentario() {
-//        // TODO
-//
-//    }
-//
-//    @Override
-//    public void enviarPostagem() {
-//        // TODO
-//
-//    }
-//
-//    @Override
-//    public void excluirComentario() {
-//        // TODO
-//    }
-//
-//    @Override
-//    public void excluirPostagem() {
-//        // TODO
-//    }
+    }
+
+    @Override
+    public void excluirPostagem() {
+
+    }
+
+    @Override
+    public void enviarComentario() {
+
+    }
+
+    @Override
+    public void excluirComentario() {
+
+    }
 
 }

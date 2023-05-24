@@ -12,6 +12,7 @@ import java.util.Date;
 import java.util.ArrayList;
 
 @Data
+@MappedSuperclass
 public abstract class UserAbstract {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

@@ -16,7 +16,6 @@ import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/receita")
-
 public class ReceitaController {
 
     @Autowired
@@ -25,7 +24,6 @@ public class ReceitaController {
     private ReceitaDto toDTO(Receita receita){
 
         return new ReceitaDto(receita.getId(),
-                receita.getAutor(),
                 receita.getTitulo(),
                 receita.getDescricao(),
                 receita.getInstrucoesPreparoPasso1(),
@@ -33,14 +31,13 @@ public class ReceitaController {
                 receita.getTempoDePreparo(),
                 receita.getInfoAdicional(),
                 receita.getDataDePostagem(),
-                receita.getIngredientes(),
-                receita.getComentarios());
+                receita.getIngredientes());
     }
 
     private Receita toModel(ReceitaDto receitaDto){
         Receita receita = new Receita();
         receita.setId(receita.getId());
-        receita.setAutor(receitaDto.getAutor());
+//        receita.setAutor(receitaDto.getAutor());
         receita.setTitulo(receitaDto.getTitulo());
         receita.setDescricao(receitaDto.getDescricao());
         receita.setInstrucoesPreparoPasso1(receitaDto.getInstrucoesPreparoPasso1());
@@ -91,7 +88,7 @@ public class ReceitaController {
         Optional<Receita> receitaOptional = receitaRepository.findById(id);
         if (receitaOptional.isPresent()) {
             Receita receita = receitaOptional.get();
-            receita.setAutor(receitaDto.getAutor());
+//            receita.setAutor(receitaDto.getAutor());
             receita.setTitulo(receitaDto.getTitulo());
             receita.setDescricao(receitaDto.getDescricao());
             receita.setInstrucoesPreparoPasso1(receitaDto.getInstrucoesPreparoPasso1());
@@ -108,17 +105,5 @@ public class ReceitaController {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
         }
 
-        @DeleteMapping("/receita/{id}")
-        public ResponseEntity<Void> delete (@PathVariable Long id){
-            Optional<Receita> receiOptional = receitaRepository.findById(id);
-            if (receitaOptional.isPresent()){
-                Receita receita = receitaOptional.get();
-                receitaRepository.delete(receita);
-                return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
-            } else {
-                return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
-            }
-        }
     }
 }
-

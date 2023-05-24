@@ -19,7 +19,7 @@ public class Receita {
 
     @ManyToOne
     @JoinColumn(name = "autor", referencedColumnName = "id")
-    private UserAbstract autor;
+    private UserPadrao autor;
     private String titulo;
     private String descricao;
     private String instrucoesPreparoPasso1;

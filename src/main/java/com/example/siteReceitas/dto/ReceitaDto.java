@@ -24,4 +24,7 @@ public class ReceitaDto {
     private LocalDateTime dataDePostagem;
     private ArrayList<String> ingredientes = new ArrayList<String>();
     private ArrayList<Comentario> comentarios = new ArrayList<Comentario>();
+
+    public ReceitaDto(Long id, String titulo, String descricao, String instrucoesPreparoPasso1, String instrucosPreparoPasso2, String tempoDePreparo, String infoAdicional, LocalDateTime dataDePostagem, ArrayList<String> ingredientes) {
+    }
 }
