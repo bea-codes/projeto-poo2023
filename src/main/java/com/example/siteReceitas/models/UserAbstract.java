@@ -23,8 +23,8 @@ public abstract class UserAbstract {
     @OneToMany(mappedBy = "usuario")
     private ArrayList<Receita> receitasFavoritas = new ArrayList<Receita>();
 
-    public abstract void enviarPostagem();
-    public abstract void excluirPostagem();
-    public abstract void enviarComentario();
-    public abstract void excluirComentario();
+//    public abstract void enviarPostagem();
+//    public abstract void excluirPostagem();
+//    public abstract void enviarComentario();
+//    public abstract void excluirComentario();
 }
