@@ -107,17 +107,17 @@ public class ReceitaController {
         } else {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
         }
+    }
 
-        @DeleteMapping("/receita/{id}")
-        public ResponseEntity<Void> delete (@PathVariable Long id){
-            Optional<Receita> receiOptional = receitaRepository.findById(id);
-            if (receitaOptional.isPresent()){
-                Receita receita = receitaOptional.get();
-                receitaRepository.delete(receita);
-                return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
-            } else {
-                return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
-            }
+    @DeleteMapping("/receita/{id}")
+    public ResponseEntity<Void> delete(@PathVariable Long id){
+        Optional<Receita> receiOptional = receitaRepository.findById(id);
+        if (receitaOptional.isPresent()){
+            Receita receita = receitaOptional.get();
+            receitaRepository.delete(receita);
+            return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
+        } else {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
         }
     }
 }
