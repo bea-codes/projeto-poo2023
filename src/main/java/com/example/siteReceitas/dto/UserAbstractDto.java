@@ -9,8 +9,6 @@ import java.util.ArrayList;
 import java.util.Date;
 
 @Data
-@AllArgsConstructor
-@NoArgsConstructor
 public class UserAbstractDto {
     private Long id;
     private String nome;

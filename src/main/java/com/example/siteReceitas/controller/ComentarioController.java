@@ -1,6 +1,6 @@
 package com.example.siteReceitas.controller;
 
-import java.util.stream.Collectors;
+
 
 import com.example.siteReceitas.dto.ComentarioDto;
 import com.example.siteReceitas.models.Comentario;
@@ -12,14 +12,12 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/comentario")
-
 public class ComentarioController {
 
     @Autowired
     private ComentarioRepository comentarioRepository;
 
         private ComentarioDto toDTO (Comentario comentario){
-
             return  new ComentarioDto(comentario.getId(),
                     comentario.getAutor(),
                     comentario.getConteudo());
@@ -32,7 +30,6 @@ public class ComentarioController {
             comentario.setConteudo(comentarioDto.getConteudo());
 
             return comentario;
-
         }
 
 }

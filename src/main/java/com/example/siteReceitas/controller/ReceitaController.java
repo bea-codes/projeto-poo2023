@@ -16,14 +16,11 @@ import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/receita")
-
 public class ReceitaController {
-
     @Autowired
     private ReceitaRepository receitaRepository;
 
     private ReceitaDto toDTO(Receita receita){
-
         return new ReceitaDto(receita.getId(),
                 receita.getAutor(),
                 receita.getTitulo(),
@@ -56,7 +53,6 @@ public class ReceitaController {
     }
 
     @GetMapping ("/receita")
-
     public ResponseEntity<List<ReceitaDto>> findAll(){
         List<Receita> receitas = receitaRepository.findAll();
         List<ReceitaDto> receitaDtos = receitas.stream()
@@ -66,7 +62,6 @@ public class ReceitaController {
     }
 
     @GetMapping("/receita/{id}")
-
     public ResponseEntity<ReceitaDto> finById(@PathVariable Long id){
         Optional<Receita> receita = receitaRepository.findById(id);
         if (receita.isPresent()) {
@@ -86,7 +81,6 @@ public class ReceitaController {
     }
 
     @PostMapping("receita/{id}")
-
     public ResponseEntity<ReceitaDto> update (@PathVariable Long id, @RequestBody ReceitaDto receitaDto){
         Optional<Receita> receitaOptional = receitaRepository.findById(id);
         if (receitaOptional.isPresent()) {
@@ -111,17 +105,16 @@ public class ReceitaController {
 
 
     }
-    @DeleteMapping("/receita/{id}")
-
-    public ResponseEntity<Void> delete (@PathVariable Long id){
-        Optional<Receita> receiOptional = receitaRepository.findById(id);
-        if (receitaOptional.isPresent()){
-            Receita receita = receitaOptional.get();
-            receitaRepository.delete(receita);
-            return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
-        } else {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
-        }
-    }
+//    @DeleteMapping("/receita/{id}")
+//    public ResponseEntity<Void> delete (@PathVariable Long id){
+//        Optional<Receita> receiOptional = receitaRepository.findById(id);
+//        if (receitaOptional.isPresent()){
+//            Receita receita = receitaOptional.get();
+//            receitaRepository.delete(receita);
+//            return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
+//        } else {
+//            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+//        }
+//    }
 }
 
