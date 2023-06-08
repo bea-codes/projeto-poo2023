@@ -5,7 +5,9 @@ import com.example.siteReceitas.dto.ReceitaDto;
 import com.example.siteReceitas.models.Receita;
 import com.example.siteReceitas.repository.ReceitaRepository;
 
+import com.example.siteReceitas.service.ReceitaService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.crossstore.ChangeSetPersister;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -17,104 +19,52 @@ import java.util.stream.Collectors;
 @RestController
 @RequestMapping("/receita")
 public class ReceitaController {
+    /*
+    * CRUD CHECKLIST
+    * 1 - CREATE -> DONE!
+    * 2 - READ   -> DONE!
+    * 3 - UPDATE -> DONE!
+    * 4 - DELETE -> DONE!
+    * */
+
     @Autowired
-    private ReceitaRepository receitaRepository;
+    private ReceitaService receitaService;
 
-    private ReceitaDto toDTO(Receita receita){
-        return new ReceitaDto(receita.getId(),
-                receita.getAutor(),
-                receita.getTitulo(),
-                receita.getDescricao(),
-                receita.getInstrucoesPreparoPasso1(),
-                receita.getInstrucosPreparoPasso2(),
-                receita.getTempoDePreparo(),
-                receita.getInfoAdicional(),
-                receita.getDataDePostagem(),
-                receita.getIngredientes(),
-                receita.getComentarios());
+    //CREATE METHOD
+    @RequestMapping(value = "/create", method = RequestMethod.POST)
+    public ResponseEntity<Receita> createReceita(@RequestBody Receita receita){
+        return ResponseEntity.status(HttpStatus.OK).body(receitaService.createReceita(receita));
     }
 
-    private Receita toModel(ReceitaDto receitaDto){
-        Receita receita = new Receita();
-        receita.setId(receita.getId());
-        receita.setAutor(receitaDto.getAutor());
-        receita.setTitulo(receitaDto.getTitulo());
-        receita.setDescricao(receitaDto.getDescricao());
-        receita.setInstrucoesPreparoPasso1(receitaDto.getInstrucoesPreparoPasso1());
-        receita.setInstrucosPreparoPasso2(receitaDto.getInstrucosPreparoPasso2());
-        receita.setTempoDePreparo(receitaDto.getTempoDePreparo());
-        receita.setInfoAdicional(receitaDto.getInfoAdicional());
-        receita.setDataDePostagem(receitaDto.getDataDePostagem());
-        receita.setIngredientes(receitaDto.getIngredientes());
-        receita.setComentarios(receitaDto.getComentarios());
-
-        return receita;
-
+    //READ METHOD
+    @RequestMapping(value = "list", method = RequestMethod.GET)
+    public ResponseEntity<List<Receita>> readReceita(){
+        return ResponseEntity.status(HttpStatus.OK).body(receitaService.getAllReceitas());
     }
 
-    @RequestMapping(value="/list", method=RequestMethod.GET)
-    public ResponseEntity<List<ReceitaDto>> findAll(){
-        List<Receita> receitas = receitaRepository.findAll();
-        List<ReceitaDto> receitaDtos = receitas.stream()
-                .map(this::toDTO)
-                .collect(Collectors.toList());
-        return ResponseEntity.status(HttpStatus.OK).body(receitaDtos);
+    //UPDATE METHOD
+    @RequestMapping(value = "/update/{receita_id}", method = RequestMethod.PUT)
+    public ResponseEntity<Receita> updateReceita(
+            @PathVariable(value = "receita_id") Long id,
+            @RequestBody Receita receita
+    ) throws ChangeSetPersister.NotFoundException
+    {
+        return ResponseEntity.status(HttpStatus.OK).body(receitaService.updateReceita(id, receita));
     }
 
-    @GetMapping("/receita/{id}")
-    public ResponseEntity<ReceitaDto> finById(@PathVariable Long id){
-        Optional<Receita> receita = receitaRepository.findById(id);
-        if (receita.isPresent()) {
-            ReceitaDto receitaDto = toDTO(receita.get());
-            return ResponseEntity.status(HttpStatus.OK).body(receitaDto);
-        }else {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
-        }
+    //DELETE METHOD
+    @RequestMapping(value = "/delete/{receita_id}", method = RequestMethod.DELETE)
+    public ResponseEntity<Receita> deleteReceita(
+            @PathVariable(value = "receita_id") Long id){
+        receitaService.deleteReceita(id);
+        return ResponseEntity.status(HttpStatus.OK).body(null);
     }
 
-    @PostMapping("/receita")
-    public ResponseEntity<ReceitaDto> create(@RequestBody ReceitaDto receitaDto){
-        Receita receita = toModel(receitaDto);
-        receitaRepository.save(receita);
-        ReceitaDto createReceitadto = toDTO(receita);
-        return ResponseEntity.status(HttpStatus.CREATED).body(createReceitadto);
-    }
-
-    @PostMapping("receita/{id}")
-    public ResponseEntity<ReceitaDto> update (@PathVariable Long id, @RequestBody ReceitaDto receitaDto){
-        Optional<Receita> receitaOptional = receitaRepository.findById(id);
-        if (receitaOptional.isPresent()) {
-            Receita receita = receitaOptional.get();
-            receita.setAutor(receitaDto.getAutor());
-            receita.setTitulo(receitaDto.getTitulo());
-            receita.setDescricao(receitaDto.getDescricao());
-            receita.setInstrucoesPreparoPasso1(receitaDto.getInstrucoesPreparoPasso1());
-            receita.setInstrucosPreparoPasso2(receitaDto.getInstrucosPreparoPasso2());
-            receita.setTempoDePreparo(receitaDto.getTempoDePreparo());
-            receita.setInfoAdicional(receitaDto.getInfoAdicional());
-            receita.setDataDePostagem(receitaDto.getDataDePostagem());
-            receita.setIngredientes(receitaDto.getIngredientes());
-            receita.setComentarios(receitaDto.getComentarios());
-            receitaRepository.save(receita);
-            ReceitaDto updateReceitadto = toDTO(receita);
-            return ResponseEntity.status(HttpStatus.OK).body(updateReceitadto);
-        } else {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
-        }
 
 
 
-    }
-//    @DeleteMapping("/receita/{id}")
-//    public ResponseEntity<Void> delete (@PathVariable Long id){
-//        Optional<Receita> receiOptional = receitaRepository.findById(id);
-//        if (receitaOptional.isPresent()){
-//            Receita receita = receitaOptional.get();
-//            receitaRepository.delete(receita);
-//            return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
-//        } else {
-//            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
-//        }
-//    }
+
+
+
 }
 
