@@ -9,6 +9,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
+@Table(name = "comentario")
 public class Comentario {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -16,6 +17,7 @@ public class Comentario {
     private UserAbstract autor;
     private String conteudo;
 
-    @ManyToOne()
+    @ManyToOne
+    @JoinColumn(name = "receita_id")
     private Receita receita;
 }

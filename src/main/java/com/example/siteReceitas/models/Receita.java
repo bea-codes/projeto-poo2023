@@ -12,13 +12,14 @@ import java.util.ArrayList;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
+@Table(name = "receita")
 public class Receita {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @ManyToOne
-    @JoinColumn(name = "autor", referencedColumnName = "id")
+    @JoinColumn(name = "autor", referencedColumnName = "autor_id")
     private UserAbstract autor;
     private String titulo;
     private String descricao;
@@ -29,6 +30,6 @@ public class Receita {
     private LocalDateTime dataDePostagem;
     private ArrayList<String> ingredientes = new ArrayList<String>();
 
-    @OneToMany(mappedBy = "receita")
+    @OneToMany(mappedBy = "receita", cascade = CascadeType.ALL)
     private ArrayList<Comentario> comentarios = new ArrayList<Comentario>();
 }
