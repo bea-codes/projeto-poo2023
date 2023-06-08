@@ -52,7 +52,7 @@ public class ReceitaController {
 
     }
 
-    @GetMapping ("/receita")
+    @RequestMapping(value="/list", method=RequestMethod.GET)
     public ResponseEntity<List<ReceitaDto>> findAll(){
         List<Receita> receitas = receitaRepository.findAll();
         List<ReceitaDto> receitaDtos = receitas.stream()
