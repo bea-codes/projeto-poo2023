@@ -37,7 +37,7 @@ public class ReceitaController {
     }
 
     //READ METHOD
-    @RequestMapping(value = "list", method = RequestMethod.GET)
+    @RequestMapping(value = "/list", method = RequestMethod.GET)
     public ResponseEntity<List<Receita>> readReceita(){
         return ResponseEntity.status(HttpStatus.OK).body(receitaService.getAllReceitas());
     }
