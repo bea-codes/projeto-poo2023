@@ -1,7 +1,6 @@
 package com.example.siteReceitas.controller;
 
 
-import com.example.siteReceitas.dto.ReceitaDto;
 import com.example.siteReceitas.models.Receita;
 import com.example.siteReceitas.repository.ReceitaRepository;
 
@@ -45,7 +44,7 @@ public class ReceitaController {
     //UPDATE METHOD
     @RequestMapping(value = "/update/{receita_id}", method = RequestMethod.PUT)
     public ResponseEntity<Receita> updateReceita(
-            @PathVariable(value = "receita_id") Long id,
+            @PathVariable(value = "receita_id") long id,
             @RequestBody Receita receita
     ) throws ChangeSetPersister.NotFoundException
     {
@@ -55,7 +54,7 @@ public class ReceitaController {
     //DELETE METHOD
     @RequestMapping(value = "/delete/{receita_id}", method = RequestMethod.DELETE)
     public ResponseEntity<Receita> deleteReceita(
-            @PathVariable(value = "receita_id") Long id){
+            @PathVariable(value = "receita_id") long id){
         receitaService.deleteReceita(id);
         return ResponseEntity.status(HttpStatus.OK).body(null);
     }

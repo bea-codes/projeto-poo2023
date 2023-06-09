@@ -1,16 +1,25 @@
 package com.example.siteReceitas.models;
 
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+
+import java.util.Date;
+
 @Data
 @Entity
 @Table(name = "user_admin")
-public class UserAdmin extends UserAbstract {
-
+@AllArgsConstructor
+@NoArgsConstructor
+public class UserAdmin {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private long id;
+    private String nome;
+    private String email;
+    private Date dataNascimento;
 
 }

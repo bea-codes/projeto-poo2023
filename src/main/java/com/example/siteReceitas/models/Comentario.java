@@ -13,8 +13,8 @@ import lombok.NoArgsConstructor;
 public class Comentario {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-    private UserAbstract autor;
+    private long id;
+    private UserPadrao autor;
     private String conteudo;
 
     @ManyToOne

@@ -32,7 +32,7 @@ public class UserAdminController {
         return userPadraoRepository.findAll();
     }
     @GetMapping("/{user_id}")
-    public Optional<UserPadrao> pegarUsuarioPorId(@PathVariable Long user_id) {
+    public Optional<UserPadrao> pegarUsuarioPorId(@PathVariable long user_id) {
         return userPadraoRepository.findById(user_id);
     }
 
@@ -52,12 +52,12 @@ public class UserAdminController {
     }
 
     @DeleteMapping("/comentario/{comentario_id}")
-    public void deletarComentario(@PathVariable Long comentario_id) {
+    public void deletarComentario(@PathVariable long comentario_id) {
         comentarioRepository.deleteById(comentario_id);
     }
 
     @DeleteMapping("/receita/{receita_id}")
-    public void deletarPostagem(@PathVariable Long receita_id) {
+    public void deletarPostagem(@PathVariable long receita_id) {
         receitaRepository.deleteById(receita_id);
     }
 }

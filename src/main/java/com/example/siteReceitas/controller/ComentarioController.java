@@ -2,7 +2,6 @@ package com.example.siteReceitas.controller;
 
 
 
-import com.example.siteReceitas.dto.ComentarioDto;
 import com.example.siteReceitas.models.Comentario;
 import com.example.siteReceitas.repository.ComentarioRepository;
 
@@ -34,13 +33,13 @@ public class ComentarioController {
     }
 
     @RequestMapping(value = "/delete/{comentario_id}")
-    public ResponseEntity<Comentario> deleteComentario(@PathVariable(value = "comentario_id") Long id){
+    public ResponseEntity<Comentario> deleteComentario(@PathVariable(value = "comentario_id") long id){
         comentarioService.deleteComentario(id);
         return ResponseEntity.status(HttpStatus.OK).body(null);
     }
 
     @RequestMapping(value = "/update/{comentario_id}", method = RequestMethod.PUT)
-    public ResponseEntity<Comentario> updateComentario(@PathVariable(value = "comentario_id") Long id,
+    public ResponseEntity<Comentario> updateComentario(@PathVariable(value = "comentario_id") long id,
                                                        @RequestBody Comentario comentario) throws ChangeSetPersister.NotFoundException {
         return ResponseEntity.status(HttpStatus.OK).body(comentarioService.updateComentario(id, comentario));
     }
