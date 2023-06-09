@@ -2,7 +2,6 @@ package com.example.siteReceitas.controller;
 
 
 import com.example.siteReceitas.models.Receita;
-import com.example.siteReceitas.repository.ReceitaRepository;
 
 import com.example.siteReceitas.service.ReceitaService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,7 +12,6 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/receita")
@@ -37,8 +35,13 @@ public class ReceitaController {
 
     //READ METHOD
     @RequestMapping(value = "/list", method = RequestMethod.GET)
-    public ResponseEntity<List<Receita>> readReceita(){
+    public ResponseEntity<List<Receita>> readAllReceita(){
         return ResponseEntity.status(HttpStatus.OK).body(receitaService.getAllReceitas());
+    }
+
+    @RequestMapping(value = "/{receita_id}", method = RequestMethod.GET)
+    public ResponseEntity<Optional<Receita>> readReceita(@PathVariable(value = "receita_Id") long id) throws ChangeSetPersister.NotFoundException {
+        return ResponseEntity.status(HttpStatus.OK).body(receitaService.getById(id));
     }
 
     //UPDATE METHOD

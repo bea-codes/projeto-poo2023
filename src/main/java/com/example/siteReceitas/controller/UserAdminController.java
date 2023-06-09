@@ -2,11 +2,15 @@ package com.example.siteReceitas.controller;
 
 import com.example.siteReceitas.models.Comentario;
 import com.example.siteReceitas.models.Receita;
+import com.example.siteReceitas.models.UserAdmin;
 import com.example.siteReceitas.models.UserPadrao;
 import com.example.siteReceitas.repository.ComentarioRepository;
 import com.example.siteReceitas.repository.ReceitaRepository;
+import com.example.siteReceitas.repository.UserAdminRepository;
 import com.example.siteReceitas.repository.UserPadraoRepository;
+import com.example.siteReceitas.service.UserAdminService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.crossstore.ChangeSetPersister;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -16,48 +20,46 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping(value="/Admin", produces = MediaType.APPLICATION_JSON_VALUE)
+@RequestMapping(value="/admin")
 public class UserAdminController {
-    @Autowired
-    public UserPadraoRepository userPadraoRepository;
 
     @Autowired
-    public ReceitaRepository receitaRepository;
+    private UserAdminService userAdminService;
 
-    @Autowired
-    public ComentarioRepository comentarioRepository;
 
-    @GetMapping()
-    public List<UserPadrao> pegarUsuarios(){
-        return userPadraoRepository.findAll();
-    }
-    @GetMapping("/{user_id}")
-    public Optional<UserPadrao> pegarUsuarioPorId(@PathVariable long user_id) {
-        return userPadraoRepository.findById(user_id);
+    // CREATE
+    @RequestMapping(value = "create", method = RequestMethod.PUT)
+    public ResponseEntity<UserAdmin> createUserAdmin( @RequestBody UserAdmin userAdmin){
+        return ResponseEntity.status(HttpStatus.OK).body(
+                userAdminService.createUserAdmin(userAdmin)
+        );
     }
 
-    @PostMapping
-    public UserPadrao criarUsuario(@RequestBody UserPadrao userPadrao) {
-        return userPadraoRepository.save(userPadrao);
+    // READ
+    @RequestMapping(value = "/list", method = RequestMethod.GET)
+    public ResponseEntity<List<UserAdmin>> readAllUserAdmin(){
+        return ResponseEntity.status(HttpStatus.OK).body(
+                userAdminService.getAllUserAdmin()
+        );
     }
 
-    @PostMapping("/receita")
-    public Receita criarReceita(@RequestBody Receita receita) {
-        return receitaRepository.save(receita);
+    @RequestMapping(value = "{userAdmin_id}", method = RequestMethod.GET)
+    public ResponseEntity<Optional<UserAdmin>> readUserAdmin(@PathVariable(value = "userAdmin_id") long id){
+        return ResponseEntity.status(HttpStatus.OK).body(userAdminService.getUserAdmin(id));
     }
 
-    @PostMapping("/comentario")
-    public Comentario criarComentario(@RequestBody Comentario comentario) {
-        return comentarioRepository.save(comentario);
+
+    // UPDATE
+    @RequestMapping(value = "/update/{userAdmin_id}", method = RequestMethod.PUT)
+    public ResponseEntity<UserAdmin> updateUserAdmin(@PathVariable(value = "userAdmin_id") long id,
+                                                       @RequestBody UserAdmin userAdmin) throws ChangeSetPersister.NotFoundException {
+        return ResponseEntity.status(HttpStatus.OK).body(userAdminService.updateUserAdmin(id, userAdmin));
     }
 
-    @DeleteMapping("/comentario/{comentario_id}")
-    public void deletarComentario(@PathVariable long comentario_id) {
-        comentarioRepository.deleteById(comentario_id);
-    }
-
-    @DeleteMapping("/receita/{receita_id}")
-    public void deletarPostagem(@PathVariable long receita_id) {
-        receitaRepository.deleteById(receita_id);
+    // DELETE
+    @RequestMapping(value = "/delete/{userAdmin_id}")
+    public ResponseEntity<Comentario> deleteUserAdmin(@PathVariable(value = "userAdmin_id") long id){
+        userAdminService.deleteUserAdmin(id);
+        return ResponseEntity.status(HttpStatus.OK).body(null);
     }
 }

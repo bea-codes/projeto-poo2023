@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 @Data
 @Entity
@@ -21,7 +22,7 @@ public class UserPadrao {
     private Date dataNascimento;
 
 
-//    @OneToMany(cascade = CascadeType.ALL, mappedBy = "autor")
-//    private ArrayList<Receita> receitas;
+    @OneToMany
+    private List<Receita> receitas;
 
 }

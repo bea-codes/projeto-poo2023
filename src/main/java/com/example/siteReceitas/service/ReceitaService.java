@@ -7,6 +7,7 @@ import org.springframework.data.crossstore.ChangeSetPersister;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class ReceitaService {
@@ -21,6 +22,8 @@ public class ReceitaService {
     public List<Receita> getAllReceitas(){
         return receitaRepository.findAll();
     }
+
+    public Optional<Receita> getById(long id){ return receitaRepository.findById(id);}
 
     public Receita updateReceita(Long id, Receita receita) throws ChangeSetPersister.NotFoundException{
         Receita receitaExistente = receitaRepository.findById(id).orElseThrow(() -> new ChangeSetPersister.NotFoundException());

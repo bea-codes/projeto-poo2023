@@ -17,7 +17,7 @@ public class Comentario {
     private UserPadrao autor;
     private String conteudo;
 
-    @ManyToOne
-    @JoinColumn(name = "receita_id")
+//    @ManyToOne
+//    @JoinColumn(name = "receita_id")
     private Receita receita;
 }
