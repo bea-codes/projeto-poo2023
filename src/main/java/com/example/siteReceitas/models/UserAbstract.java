@@ -12,6 +12,7 @@ import java.util.Date;
 import java.util.ArrayList;
 
 @Data
+@Entity
 public abstract class UserAbstract {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -20,7 +21,7 @@ public abstract class UserAbstract {
     private String email;
     private Date dataNascimento;
 
-    @OneToMany(mappedBy = "usuario")
+    @OneToMany(mappedBy = "autor")
     private ArrayList<Receita> receitasFavoritas = new ArrayList<Receita>();
 
 //    public abstract void enviarPostagem();
