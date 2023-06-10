@@ -22,7 +22,7 @@ public class UserPadrao {
     private Date dataNascimento;
 
 
-    @OneToMany
+    @OneToMany(mappedBy = "autor")
     private List<Receita> receitas;
 
 }

@@ -17,8 +17,8 @@ public class Receita {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-//    @ManyToOne
-//    @JoinColumn(name = "user")
+    @ManyToOne
+    @JoinColumn(name = "user")
     private UserPadrao autor;
     private String titulo;
     private String descricao;

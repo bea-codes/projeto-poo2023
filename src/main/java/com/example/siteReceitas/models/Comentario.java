@@ -19,5 +19,5 @@ public class Comentario {
 
 //    @ManyToOne
 //    @JoinColumn(name = "receita_id")
-    private Receita receita;
+//    private Receita receita;
 }
