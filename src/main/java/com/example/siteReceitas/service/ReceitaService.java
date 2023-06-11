@@ -29,7 +29,7 @@ public class ReceitaService {
         Receita receitaExistente = receitaRepository.findById(id).orElseThrow(() -> new ChangeSetPersister.NotFoundException());
         receitaExistente.setId(receita.getId());
         receitaExistente.setAutor(receita.getAutor());
-        receitaExistente.setComentarios(receita.getComentarios());
+//        receitaExistente.setComentarios(receita.getComentarios());
         receitaExistente.setDescricao(receita.getDescricao());
         receitaExistente.setTitulo(receita.getTitulo());
         receitaExistente.setDataDePostagem(receita.getDataDePostagem());

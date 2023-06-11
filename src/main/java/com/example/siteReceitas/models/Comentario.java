@@ -9,15 +9,17 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "comentario")
 public class Comentario {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
+
+    @ManyToOne
+    @JoinColumn(name = "comentario_id")
     private UserPadrao autor;
     private String conteudo;
 
-//    @ManyToOne
-//    @JoinColumn(name = "receita_id")
-//    private Receita receita;
+    @ManyToOne
+    @JoinColumn(name = "comentarios_id")
+    private Receita receita;
 }

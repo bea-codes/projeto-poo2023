@@ -5,7 +5,6 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -24,5 +23,9 @@ public class UserPadrao {
 
     @OneToMany(mappedBy = "autor")
     private List<Receita> receitas;
+
+    @OneToMany(mappedBy = "autor")
+
+    private List<Comentario> comentarios;
 
 }

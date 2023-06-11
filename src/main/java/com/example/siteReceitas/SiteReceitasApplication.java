@@ -10,8 +10,6 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
 
 @SpringBootApplication
-@ComponentScan("com.example.siteReceitas.repository")
-@EntityScan("com.example.siteReceitas.models.UserPadrao")
 public class SiteReceitasApplication {
 
 	public static void main(String[] args) {

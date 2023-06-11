@@ -6,7 +6,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
+import java.util.List;
 
 @Data
 @AllArgsConstructor
@@ -18,7 +18,7 @@ public class Receita {
     private long id;
 
     @ManyToOne
-    @JoinColumn(name = "user")
+    @JoinColumn(name = "receita_id")
     private UserPadrao autor;
     private String titulo;
     private String descricao;
@@ -27,8 +27,9 @@ public class Receita {
     private String tempoDePreparo;
     private String infoAdicional;
     private LocalDateTime dataDePostagem;
-    private ArrayList<String> ingredientes;
+    private List<String> ingredientes;
 
     @OneToMany(mappedBy = "receita", cascade = CascadeType.ALL)
-    private ArrayList<Comentario> comentarios;
+    private List<Comentario> comentarios;
+
 }

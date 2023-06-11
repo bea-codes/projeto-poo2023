@@ -11,7 +11,6 @@ import java.util.Date;
 
 @Data
 @Entity
-@Table(name = "user_admin")
 @AllArgsConstructor
 @NoArgsConstructor
 public class UserAdmin {
