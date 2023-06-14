@@ -42,8 +42,8 @@ public class UserPadraoController {
         );
     }
 
-    @RequestMapping(value = "{userAdmin_id}", method = RequestMethod.GET)
-    public ResponseEntity<Optional<UserPadrao>> readUserAdmin(@PathVariable(value = "userAdmin_id") long id){
+    @RequestMapping(value = "{userpadrao_id}", method = RequestMethod.GET)
+    public ResponseEntity<Optional<UserPadrao>> readUserAdmin(@PathVariable(value = "userpadrao_id") long id){
         return ResponseEntity.status(HttpStatus.OK).body(userPadraoService.getUserPadrao(id));
     }
 

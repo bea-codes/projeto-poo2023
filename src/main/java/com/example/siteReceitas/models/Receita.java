@@ -6,6 +6,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
+import java.util.Date;
 import java.util.List;
 
 @Data
@@ -26,7 +27,7 @@ public class Receita {
     private String instrucosPreparoPasso2;
     private String tempoDePreparo;
     private String infoAdicional;
-    private LocalDateTime dataDePostagem;
+    private Date dataDePostagem;
     private List<String> ingredientes;
 
     @OneToMany(mappedBy = "receita", cascade = CascadeType.ALL)
