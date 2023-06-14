@@ -1,6 +1,7 @@
 package com.example.siteReceitas.models;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -35,6 +36,7 @@ public class Receita {
 
     @OneToMany(mappedBy = "receita", cascade = CascadeType.ALL)
     @JsonManagedReference
+    @JsonIgnore
     private List<Comentario> comentarios;
 
 }

@@ -25,6 +25,7 @@ public class UserPadrao {
     @OneToMany(mappedBy = "autor", cascade = CascadeType.ALL)
     private List<Receita> receitas;
 
+    @JsonManagedReference
     @OneToMany(mappedBy = "autor",cascade = CascadeType.ALL)
     private List<Comentario> comentarios;
 
