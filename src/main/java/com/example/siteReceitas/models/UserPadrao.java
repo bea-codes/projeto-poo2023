@@ -1,5 +1,6 @@
 package com.example.siteReceitas.models;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -20,7 +21,7 @@ public class UserPadrao {
     private String email;
     private Date dataNascimento;
 
-
+    @JsonManagedReference
     @OneToMany(mappedBy = "autor", cascade = CascadeType.ALL)
     private List<Receita> receitas;
 

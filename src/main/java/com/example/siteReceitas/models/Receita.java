@@ -1,5 +1,7 @@
 package com.example.siteReceitas.models;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -19,7 +21,8 @@ public class Receita {
     private long id;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "receita_id")
+    @JsonBackReference
+    @JoinColumn(name = "receita_id", nullable = false)
     private UserPadrao autor;
     private String titulo;
     private String descricao;
@@ -31,6 +34,7 @@ public class Receita {
     private List<String> ingredientes;
 
     @OneToMany(mappedBy = "receita", cascade = CascadeType.ALL)
+    @JsonManagedReference
     private List<Comentario> comentarios;
 
 }

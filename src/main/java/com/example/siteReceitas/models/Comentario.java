@@ -1,5 +1,6 @@
 package com.example.siteReceitas.models;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -21,5 +22,6 @@ public class Comentario {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "comentarios_id")
+    @JsonBackReference
     private Receita receita;
 }
