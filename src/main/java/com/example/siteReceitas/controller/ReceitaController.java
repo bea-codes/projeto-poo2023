@@ -40,7 +40,7 @@ public class ReceitaController {
     }
 
     @RequestMapping(value = "/{receita_id}", method = RequestMethod.GET)
-    public ResponseEntity<Optional<Receita>> readReceita(@PathVariable(value = "receita_Id") long id) throws ChangeSetPersister.NotFoundException {
+    public ResponseEntity<Optional<Receita>> readReceita(@PathVariable(value = "receita_id") long id) throws ChangeSetPersister.NotFoundException {
         return ResponseEntity.status(HttpStatus.OK).body(receitaService.getById(id));
     }
 
