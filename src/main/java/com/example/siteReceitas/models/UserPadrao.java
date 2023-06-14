@@ -21,11 +21,10 @@ public class UserPadrao {
     private Date dataNascimento;
 
 
-    @OneToMany(mappedBy = "autor")
+    @OneToMany(mappedBy = "autor", cascade = CascadeType.ALL)
     private List<Receita> receitas;
 
-    @OneToMany(mappedBy = "autor")
-
+    @OneToMany(mappedBy = "autor",cascade = CascadeType.ALL)
     private List<Comentario> comentarios;
 
 }

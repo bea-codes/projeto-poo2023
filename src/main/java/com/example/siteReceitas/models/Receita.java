@@ -18,7 +18,7 @@ public class Receita {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "receita_id")
     private UserPadrao autor;
     private String titulo;
