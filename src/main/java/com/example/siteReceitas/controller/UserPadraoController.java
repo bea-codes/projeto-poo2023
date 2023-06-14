@@ -27,7 +27,7 @@ public class UserPadraoController {
 
 
     // CREATE
-    @RequestMapping(value = "create", method = RequestMethod.PUT)
+    @RequestMapping(value = "/create", method = RequestMethod.POST)
     public ResponseEntity<UserPadrao> createUserAdmin(@RequestBody UserPadrao userPadrao){
         return ResponseEntity.status(HttpStatus.OK).body(
                 userPadraoService.createUserPadrao(userPadrao)
